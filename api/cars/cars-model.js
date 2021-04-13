@@ -8,6 +8,13 @@ const getById = (id) => {
   return db("cars").where("id", id)
 }
 
-const create = (car) => {
-  return db("cars").insert(car)
+const create = async (car) => {
+  const [id] = await db("cars").insert(car)
+  return getById(id);
 }
+
+module.exports = (
+  getAll,
+  getById,
+  create
+)
