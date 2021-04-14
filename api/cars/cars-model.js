@@ -13,8 +13,8 @@ const create = async (car) => {
   return getById(id);
 }
 
-module.exports = (
+module.exports = {
   getAll,
   getById,
   create
-)
+}

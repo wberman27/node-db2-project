@@ -18,8 +18,13 @@ router.get('/:id' , mw.checkCarId, (req, res)=>{
 });
 
 //create
-router.post('/' , mw.checkCarPayload, mw.checkVinNumberValid, mw.checkVinNumberUnique, (req, res)=>{
-    
+router.post('/' , mw.checkCarPayload, mw.checkVinNumberValid, mw.checkVinNumberUnique, async (req, res, next)=>{
+    try{
+        const newCar = await Cars.create(req.body)
+        res.status(201).json(newCar)
+    }catch(err){
+        next(err)
+    }
 });
 
 router.use((err, req, res, next) =>{
